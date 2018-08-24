@@ -1,2 +1,2 @@
 # drupal-php-fpm_images
-php-fpm docker images for use with Drupal projects
+php-fpm docker images for use with Drupal projects.
