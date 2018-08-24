@@ -33,6 +33,7 @@ RUN apt-get update && apt-get install --fix-missing -y \
 RUN chmod +x /usr/local/bin/docker-php-ext-install
 RUN docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ \
 && docker-php-ext-install \
+	apcu \
   calendar \
   exif \
   gd \
@@ -57,6 +58,17 @@ RUN touch /usr/local/etc/php/conf.d/xdebug.ini &&\
   echo xdebug.remote_connect_back=1 >> /usr/local/etc/php/conf.d/xdebug.ini &&\
   echo xdebug.remote_port=9000 >> /usr/local/etc/php/conf.d/xdebug.ini &&\
   echo xdebug.remote_log=/tmp/php5-xdebug.log >> /usr/local/etc/php/conf.d/xdebug.ini
+
+# pecl will claim success even if one install fails, so we need to perform each install separately
+RUN pecl install APCu-5.1.11; \
+	pecl install memcached-3.0.4; \
+	pecl install redis-4.1.1;
+	\
+	docker-php-ext-enable \
+		apcu \
+		memcached \
+		redis \
+		; 
 
 # installation of ssmtp
 RUN DEBIAN_FRONTEND=noninteractive apt-get install --fix-missing -y ssmtp && rm -r /var/lib/apt/lists/*
