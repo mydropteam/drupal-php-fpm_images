@@ -33,7 +33,6 @@ RUN apt-get update && apt-get install --fix-missing -y \
 RUN chmod +x /usr/local/bin/docker-php-ext-install
 RUN docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ \
 && docker-php-ext-install \
-	apcu \
   calendar \
   exif \
   gd \
