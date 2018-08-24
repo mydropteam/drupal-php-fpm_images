@@ -63,12 +63,11 @@ RUN touch /usr/local/etc/php/conf.d/xdebug.ini &&\
 RUN pecl install APCu-5.1.11; \
 	pecl install memcached-3.0.4; \
 	pecl install redis-4.1.1;
-	\
-	docker-php-ext-enable \
+
+RUN	docker-php-ext-enable \
 		apcu \
 		memcached \
-		redis \
-		; 
+		redis;
 
 # installation of ssmtp
 RUN DEBIAN_FRONTEND=noninteractive apt-get install --fix-missing -y ssmtp && rm -r /var/lib/apt/lists/*
