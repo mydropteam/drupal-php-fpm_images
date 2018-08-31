@@ -69,7 +69,7 @@ RUN	docker-php-ext-enable \
 		redis;
 
 # Give ownership of the /var/www/html to www-data users
-RUN chown www-data:root /var/www/html -R
+RUN chown www-data:root /var/www -R
 
 # installation of ssmtp
 RUN DEBIAN_FRONTEND=noninteractive apt-get install --fix-missing -y ssmtp && rm -r /var/lib/apt/lists/*
