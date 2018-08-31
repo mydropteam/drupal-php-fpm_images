@@ -68,6 +68,9 @@ RUN	docker-php-ext-enable \
 		memcached \
 		redis;
 
+# Give ownership of the /var/www/html to www-data users
+RUN chown www-data:root /var/www/html -R
+
 # installation of ssmtp
 RUN DEBIAN_FRONTEND=noninteractive apt-get install --fix-missing -y ssmtp && rm -r /var/lib/apt/lists/*
 ADD config/ssmtp.conf /etc/ssmtp/ssmtp.conf
